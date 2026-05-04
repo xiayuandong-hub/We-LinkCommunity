@@ -1,4 +1,4 @@
-> 使用说明：请在醒目的地方标明 powered by pybbs
+> 使用说明：请在醒目的地方标明 powered by We-Link
 
 [English README](README.en_US.md)
 
@@ -17,11 +17,11 @@
 
 二次开发或商用请遵守开源协议
 
-[捐赠列表](https://github.com/atjiu/pybbs/wiki/%E6%8D%90%E8%B5%A0)
+[捐赠列表](https://github.com/xiayuandong-hub/We-LinkCommunity)
 
 ## 文档
 
-[文档地址](https://atjiu.github.io/pybbs/)
+[文档地址](https://github.com/xiayuandong-hub/We-LinkCommunity)
 
 文档地址打不开看这里（需要电脑上配置好maven环境）
 
@@ -46,7 +46,7 @@
 
 ## 运行
 
-还是看文档吧，更详细 [传送门](https://atjiu.github.io/pybbs/#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
+还是看文档吧，更详细 [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
 
 ## 手动打包
 
@@ -54,7 +54,7 @@
 mvn clean package
 ```
 
-打包完成后，会在项目根目录下的target目录里生成一个`pybbs.jar`文件，解压运行 `java -jar pybbs.jar` 即可启动论坛服务
+打包完成后，会在项目根目录下的target目录里生成一个`we-link.jar`文件，解压运行 `java -jar we-link.jar` 即可启动论坛服务
 
 其实手动打包后生成的tar.gz文件就是github上release里最新的发布包，下载后解压内容是一样的
 
@@ -64,7 +64,7 @@ mvn clean package
 
 ## 反馈
 
-- [issues](https://github.com/atjiu/pybbs/issues)
+- [issues](https://github.com/xiayuandong-hub/We-LinkCommunity/issues)
 - QQ群 1048094312
 
 *提问题的时候请将问题重现步骤描述清楚*
@@ -81,7 +81,7 @@ mvn clean package
 
 |              | 2.2                                                                 | 2.3                                                     | 2.4                                                                                                                              | 2.6                                                   | 2.6.1 | 3.0                                                                 | 4.0(这个版本是纯接口的)                                                      | master                                      |
 | :----------- | :------------------------------------------------------------------ | :------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------- | :---- | :------------------------------------------------------------------ | :--------------------------------------------------------------------------- | :------------------------------------------ |
-| 开源地址     | [传送门](https://github.com/atjiu/pybbs/tree/v2.2)               | [传送门](https://github.com/atjiu/pybbs/tree/v2.3)   | [传送门](https://github.com/atjiu/pybbs/tree/v2.4)                                                                            | [传送门](https://github.com/atjiu/pybbs/tree/v2.6) |       | [传送门](https://github.com/atjiu/pybbs/tree/v3.0)                | [传送门](https://github.com/atjiu/pybbs/tree/v4.0-mongodb-api)            | [传送门](https://github.com/atjiu/pybbs) |
+| 开源地址     | [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity/tree/v2.2)               | [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity/tree/v2.3)   | [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity/tree/v2.4)                                                                            | [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity/tree/v2.6) |       | [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity/tree/v3.0)                | [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity/tree/v4.0-mongodb-api)            | [传送门](https://github.com/xiayuandong-hub/We-LinkCommunity) |
 | 开发框架     | JFinal                                                              | JFinal                                                  | Spring-Boot                                                                                                                      | Spring-Boot                                           |       | Spring-Boot，MyBatis                                                | Spring-Boot                                                                  | Spring-Boot, Mybatis-Plus                   |
 | 数据库       | MySQL                                                               | MySQL                                                   | MySQL                                                                                                                            | MySQL                                                 |       | MySQL                                                               | MongoDB                                                                      | MySQL                                       |
 | 前台         | &radic;                                                             |                                                         |                                                                                                                                  |                                                       |       | &radic;                                                             |                                                                              | &radic;                                     |
@@ -99,12 +99,12 @@ mvn clean package
 | 搜索         | 模糊搜索                                                            | Solr                                                    | 模糊搜索                                                                                                                         | Hibernate-Search                                      |       | Elasticsearch                                                       |                                                                              ||Elasticsearch                               |
 | 标签         | &radic;                                                             | &radic;                                                 |                                                                                                                                  | &radic;                                               |       | &radic;                                                             |                                                                              | &radic;                                     |
 | 国际化       |                                                                     |                                                         | &radic;                                                                                                                          |                                                       |       |                                                                     |                                                                              ||
-| APP          |                                                                     | [pybbsMD(Android)](https://github.com/atjiu/pybbsMD) |                                                                                                                                  |                                                       |       |                                                                     |                                                                              ||
-| 前端         |                                                                     |                                                         |                                                                                                                                  |                                                       |       |                                                                     | [pybbs-front-react(React.js)](https://github.com/atjiu/pybbs-front-react) ||
+| APP          |                                                                     | [We-Link Mobile(Android)](https://github.com/xiayuandong-hub/We-LinkCommunity) |                                                                                                                                  |                                                       |       |                                                                     |                                                                              ||
+| 前端         |                                                                     |                                                         |                                                                                                                                  |                                                       |       |                                                                     | [We-Link Front React(React.js)](https://github.com/xiayuandong-hub/We-LinkCommunity) ||
 
 ## License
 
-GNU AGPLv3 (pybbs4.0开始，开源协议从MIT更改为GNU AGPLv3)
+GNU AGPLv3 (We-Link4.0开始，开源协议从MIT更改为GNU AGPLv3)
 
 ---
 

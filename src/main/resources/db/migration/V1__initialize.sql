@@ -6,7 +6,7 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.24)
-# Database: pybbs
+# Database: We-Link
 # Generation Time: 2018-12-06 03:09:53 +0000
 # ************************************************************
 
@@ -339,7 +339,7 @@ VALUES
 	(5, 'cookie_max_age', '604800', 'cookie有效期，单位秒，默认1周', 23, 'number', NULL, 0),
 	(6, 'cookie_name', 'user_token', '存cookie时用到的名称', 23, 'text', NULL, 0),
 	(11, 'intro', '<h5>属于Java语言的bbs</h5><p>在这里，您可以提问，回答，分享，诉说，这是个属于Java程序员的社区，欢迎您的加入！</p>', '站点介绍', 23, 'text', NULL, 0),
-	(15, 'name', '朋也社区', '站点名称', 23, 'text', NULL, 0),
+	(15, 'name', 'We-Link社区', '站点名称', 23, 'text', NULL, 0),
 	(16, 'page_size', '20', '分页每页条数', 23, 'number', NULL, 0),
 	(39, 'search', '0', '是否开启搜索功能（如果开启，需要额外启动一个ES服务，并填好ES相关的配置）', 35, 'radio', NULL, 0),
 	(44, 'topic_view_increase_interval', '600', '同一个用户浏览同一个话题多长时间算一次浏览量，默认10分钟，单位秒（只有当配置了redis才会生效）', 23, 'number', NULL, 0),
@@ -348,7 +348,7 @@ VALUES
 	(14, 'mail_username', 'xxoo@qq.com', '发送邮件的邮箱地址', 24, 'email', NULL, 0),
 	(18, 'static_url', 'http://localhost:8080/static/upload/', '静态文件访问地址，主要用于上传图片的访问，注意最后有个\"/\"', 25, 'url', NULL, 0),
 	(20, 'upload_avatar_size_limit', '2', '上传头像文件大小，单位MB，默认2MB', 25, 'number', NULL, 0),
-	(21, 'upload_path', '/Users/hh/git/github/pybbs/static/upload/', '上传文件的路径，注意最后有个\"/\"', 25, 'text', NULL, 0),
+	(21, 'upload_path', '/Users/hh/git/github/We-Link/static/upload/', '上传文件的路径，注意最后有个\"/\"', 25, 'text', NULL, 0),
 	(7, 'create_comment_score', '5', '发布评论奖励的积分', 26, 'number', NULL, 0),
 	(8, 'create_topic_score', '10', '创建话题奖励的积分', 26, 'number', NULL, 0),
 	(9, 'delete_comment_score', '5', '删除评论要被扣除的积分', 26, 'number', NULL, 0),

@@ -15,7 +15,7 @@
 - 后台配置的静态资源`static`文件夹路径要跟程序启动的jar文件在一个目录内且同级请不要配置在其它地方，如果是用nginx映射的静态资源文件夹则没有这限制
 - windows下的路径要么是 `\\` 要么是 `/` 请不要用windows自带的一个 `\` 做路径，程序不认，会导致上传失败
 
-首先这是个只会在用IDEA开发启动时出现的问题，原因是IDEA在启动SpringBoot项目的时候会把项目中的 `resources` 加载到内存里，pybbs中的`static`文件夹在resources里
+首先这是个只会在用IDEA开发启动时出现的问题，原因是IDEA在启动SpringBoot项目的时候会把项目中的 `resources` 加载到内存里，We-Link中的`static`文件夹在resources里
 
 所以项目启动之后，再上传到`static`文件夹里的文件就不会被idea自动加载了，这时候只需要在idea里build一下项目即可，不用重启
 
@@ -89,7 +89,7 @@ init_connect='SET NAMES utf8mb4'
 
 加好后保存，然后重启mysql服务
 
-接着把pybbs的表内字段有可能会出现emoji的字段的编码都改成 `utf8mb4_unicode_ci` 这个类型，再发帖就没问题了
+接着把We-Link的表内字段有可能会出现emoji的字段的编码都改成 `utf8mb4_unicode_ci` 这个类型，再发帖就没问题了
 
 === 标签在哪添加
 

@@ -11,7 +11,7 @@
 [source,yml,indent=0]
 ----
 datasource_driver: com.mysql.cj.jdbc.Driver
-datasource_url: jdbc:mysql://localhost:3306/pybbs?useSSL=false&characterEncoding=utf8
+datasource_url: jdbc:mysql://localhost:3306/we_link?useSSL=false&characterEncoding=utf8
 datasource_username: root
 datasource_password:
 ----

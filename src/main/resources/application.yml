@@ -18,6 +18,8 @@ spring:
     multipart:
       max-file-size: -1
       max-request-size: -1
+  flyway:
+    enabled: false
 
 
 #  resources:

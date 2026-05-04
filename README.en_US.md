@@ -1,8 +1,8 @@
-> Instructions: Please mark in a conspicuous place `powered by pybbs`
+> Instructions: Please mark in a conspicuous place `powered by We-Link`
 
 ## Document
 
-[Document](https://atjiu.github.io/pybbs/)
+[Document](https://github.com/xiayuandong-hub/We-LinkCommunity)
 
 The documentation is written using the open source tool [docsify](https://docsify.js.org/#/quickstart)
 
@@ -31,7 +31,7 @@ The documentation is written using the open source tool [docsify](https://docsif
 
 ## Getting Started
 
-[Getting Started Document](https://atjiu.github.io/pybbs/#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
+[Getting Started Document](https://github.com/xiayuandong-hub/We-LinkCommunity#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B)
 
 **Special thanks to github user [@zzzzbw](https://github.com/zzzzbw) for helping to develop dockerfile**
 
@@ -41,7 +41,7 @@ The documentation is written using the open source tool [docsify](https://docsif
 mvn clean package
 ```
 
-After the package is complete, a `pybbs.jar` file will be generated in the target directory under the project root directory, run `java -jar pybbs.jar` to start the forum service.
+After the package is complete, a `we-link.jar` file will be generated in the target directory under the project root directory, run `java -jar we-link.jar` to start the forum service.
 
 In addition, the tar.gz file generated after manual packaging is the latest release package in the release on github. After downloading, the extracted content is the same.
 
@@ -51,7 +51,7 @@ Project test cases have not been written yet!
 
 ## Feedback
 
-- [issues](https://github.com/atjiu/pybbs/issues)
+- [issues](https://github.com/xiayuandong-hub/We-LinkCommunity/issues)
 
 *Please clearly describe the problem recurring steps when asking questions*
 

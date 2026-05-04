@@ -1,10 +1,10 @@
-*开发主题，首先要会使用freemarker模板引擎, 因为pybbs的页面用的就是freemarker模式*
+*开发主题，首先要会使用freemarker模板引擎, 因为We-Link的页面用的就是freemarker模式*
 
 必要说明：
 
 - 主题开发好了，需要放在 `src/main/resources/templates/theme` 下，系统启动会自动读取主题目录，然后在后台就可以选择你想要的主题了
-- 如果你不是开发环境，那需要将开发好的或者下载的主题文件夹放在 `pybbs.jar` 所在目录下的 `templates/theme` 文件夹下，如果这两个文件夹没有，需要你创建好
-- 开发主题肯定需要引入样式，建议使用 `cdnjs.com` 的外链，但也有一些对系统内的样式，这个样式文件需要放在 `pybbs.jar` 目录所在文件夹下的 `templates/static/theme/css` 文件夹下，js同理
+- 如果你不是开发环境，那需要将开发好的或者下载的主题文件夹放在 `we-link.jar` 所在目录下的 `templates/theme` 文件夹下，如果这两个文件夹没有，需要你创建好
+- 开发主题肯定需要引入样式，建议使用 `cdnjs.com` 的外链，但也有一些对系统内的样式，这个样式文件需要放在 `we-link.jar` 目录所在文件夹下的 `templates/static/theme/css` 文件夹下，js同理
 
 == 主题目录
 
@@ -178,7 +178,7 @@ boolean isEmpty(String txt);
 
 == Freemarker自定义标签
 
-pybbs提供了如下几个自定义标签
+We-Link提供了如下几个自定义标签
 
 |===
 | 标签名             | 描述           | 参数                       | 返回的对象(类型)

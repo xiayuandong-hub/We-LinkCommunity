@@ -1,6 +1,6 @@
 === 短信验证码登录/注册
 
-在群友提供的阿里云短信的key, secret及模板的帮助下，朋也社区也有了短信验证码登录的功能了，配置如下
+在群友提供的阿里云短信的key, secret及模板的帮助下，We-Link社区也有了短信验证码登录的功能了，配置如下
 
 登录 http://aliyun.com ，打开 https://dysms.console.aliyun.com/dysms.htm?spm=5176.8195934.1283918..623230c9cuQEpk#/domestic/text/sign 链接
 

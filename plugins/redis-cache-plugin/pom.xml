@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>co.yiiu.pybbs</groupId>
+  <groupId>co.yiiu.welink</groupId>
   <artifactId>redis-cache-plugin</artifactId>
   <version>1.0</version>
 
   <dependencies>
     <dependency>
       <groupId>co.yiiu</groupId>
-      <artifactId>pybbs</artifactId>
+      <artifactId>we-link</artifactId>
       <version>5.2.1</version>
       <scope>provided</scope>
     </dependency>

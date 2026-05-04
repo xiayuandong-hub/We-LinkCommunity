@@ -1,6 +1,6 @@
-= 朋也社区文档
+= We-Link社区文档
 
-:Author:    朋也
+:Author:    We-Link
 :Email:     <py2qiuse@gmail.com>
 :Date:      2019
 :Revision:  1.0
@@ -17,7 +17,7 @@ include::introduction.asciidoc[leveloffset=+1]
 include::ready.asciidoc[]
 include::getting-started.asciidoc[]
 
-== 朋也社区案例
+== We-Link社区案例
 
 include::case.asciidoc[]
 

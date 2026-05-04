@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>co.yiiu</groupId>
-    <artifactId>pybbs</artifactId>
+    <artifactId>we-link</artifactId>
     <version>5.2.1</version>
     <packaging>jar</packaging>
 
-    <name>pybbs</name>
+    <name>We-Link</name>
     <description>更实用的Java语言开发的论坛</description>
 
     <parent>
@@ -222,7 +222,7 @@
 
     <build>
 
-        <finalName>pybbs</finalName>
+        <finalName>we-link</finalName>
 
         <resources>
             <resource>

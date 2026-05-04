@@ -29,7 +29,7 @@ image:./images/captcha.gif[]
     "records":[
       {
         "collectCount":0,
-        "avatar":"http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+        "avatar":"http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
         "title":"我是一个话题标题",
         "userId":1,
         "good":false,
@@ -50,7 +50,7 @@ image:./images/captcha.gif[]
         "modifyTime":1548992296000,
         "top":false,
         "id":1,
-        "username":"tomoya"
+        "username":"We-Link"
       }
     ],
     "total":1,
@@ -80,9 +80,9 @@ image:./images/captcha.gif[]
   "detail": {
     "user": {
       "id": 1,
-      "username": "tomoya",
+      "username": "We-Link",
       "telegramName": null,
-      "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+      "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
       "email": null,
       "website": null,
       "bio": null,
@@ -231,7 +231,7 @@ image:./images/captcha.gif[]
   "detail": {
     "tag": {
       "id": 17,
-      "name": "朋也社区",
+      "name": "We-Link社区",
       "description": null,
       "icon": null,
       "topicCount": 3,
@@ -283,7 +283,7 @@ image:./images/captcha.gif[]
   "description": "SUCCESS",
   "detail": {
     "errors": [],
-    "urls": ["http://localhost:8080/static/upload/avatar/tomoya/avatar.png"]
+    "urls": ["http://localhost:8080/static/upload/avatar/We-Link/avatar.png"]
   }
 }
 ----
@@ -312,15 +312,15 @@ image:./images/captcha.gif[]
         "inTime": 1548992961000,
         "commentId": null,
         "upIds": "2",
-        "username": "tomoya",
-        "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+        "username": "We-Link",
+        "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
         "layer": 0
       },
       {
         "id": 5,
         "topicId": 1,
         "userId": 2,
-        "content": "@tomoya 我是第三条评论",
+        "content": "@We-Link 我是第三条评论",
         "inTime": 1548993369000,
         "commentId": 1,
         "upIds": null,
@@ -357,9 +357,9 @@ image:./images/captcha.gif[]
     },
     "topicUser": {
       "id": 1,
-      "username": "tomoya",
+      "username": "We-Link",
       "telegramName": null,
-      "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+      "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
       "email": null,
       "website": null,
       "bio": null,
@@ -695,7 +695,7 @@ image:./images/captcha.gif[]
         "avatar": "http://localhost:8080/static/upload/avatar/test/avatar.png",
         "title": "我是一个话题标题",
         "userId": 2,
-        "content": "@tomoya 我是第三条评论",
+        "content": "@We-Link 我是第三条评论",
         "username": "test"
       },
       {
@@ -708,7 +708,7 @@ image:./images/captcha.gif[]
         "avatar": "http://localhost:8080/static/upload/avatar/test/avatar.png",
         "title": "我是一个话题标题",
         "userId": 2,
-        "content": "@tomoya 我是第三条评论",
+        "content": "@We-Link 我是第三条评论",
         "username": "test"
       }
     ]
@@ -751,10 +751,10 @@ image:./images/captcha.gif[]
         {
           "inTime": 1548992961000,
           "topicId": 1,
-          "commentUsername": "tomoya",
+          "commentUsername": "We-Link",
           "upIds": "2",
           "id": 1,
-          "topicUsername": "tomoya",
+          "topicUsername": "We-Link",
           "title": "我是一个话题标题",
           "userId": 1,
           "content": "modify_comment_content"
@@ -770,7 +770,7 @@ image:./images/captcha.gif[]
       "records": [
         {
           "collectCount": 2,
-          "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+          "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
           "title": "我是一个话题标题",
           "userId": 1,
           "good": false,
@@ -782,7 +782,7 @@ image:./images/captcha.gif[]
           "top": false,
           "upIds": "2",
           "id": 1,
-          "username": "tomoya"
+          "username": "We-Link"
         }
       ],
       "total": 1,
@@ -794,9 +794,9 @@ image:./images/captcha.gif[]
     "collectCount": 1,
     "user": {
       "id": 1,
-      "username": "tomoya",
+      "username": "We-Link",
       "telegramName": null,
-      "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+      "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
       "email": "py2qiuse@gmail.com",
       "website": "https://17dev.club/",
       "bio": "hello world",
@@ -827,7 +827,7 @@ image:./images/captcha.gif[]
       "records": [
         {
           "collectCount": 2,
-          "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+          "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
           "title": "我是一个话题标题",
           "userId": 1,
           "good": false,
@@ -839,7 +839,7 @@ image:./images/captcha.gif[]
           "top": false,
           "upIds": "2",
           "id": 1,
-          "username": "tomoya"
+          "username": "We-Link"
         }
       ],
       "total": 1,
@@ -850,9 +850,9 @@ image:./images/captcha.gif[]
     },
     "user": {
       "id": 1,
-      "username": "tomoya",
+      "username": "We-Link",
       "telegramName": null,
-      "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+      "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
       "email": "py2qiuse@gmail.com",
       "website": "https://17dev.club/",
       "bio": "hello world",
@@ -884,10 +884,10 @@ image:./images/captcha.gif[]
         {
           "inTime": 1548992961000,
           "topicId": 1,
-          "commentUsername": "tomoya",
+          "commentUsername": "We-Link",
           "upIds": "2",
           "id": 1,
-          "topicUsername": "tomoya",
+          "topicUsername": "We-Link",
           "title": "我是一个话题标题",
           "userId": 1,
           "content": "modify_comment_content"
@@ -901,9 +901,9 @@ image:./images/captcha.gif[]
     },
     "user": {
       "id": 1,
-      "username": "tomoya",
+      "username": "We-Link",
       "telegramName": null,
-      "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+      "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
       "email": "py2qiuse@gmail.com",
       "website": "https://17dev.club/",
       "bio": "hello world",
@@ -932,9 +932,9 @@ image:./images/captcha.gif[]
   "detail": {
     "user": {
       "id": 1,
-      "username": "tomoya",
+      "username": "We-Link",
       "telegramName": null,
-      "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+      "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
       "email": "py2qiuse@gmail.com",
       "website": "https://17dev.club/",
       "bio": "hello world",
@@ -946,7 +946,7 @@ image:./images/captcha.gif[]
       "records": [
         {
           "collectCount": 2,
-          "avatar": "http://localhost:8080/static/upload/avatar/tomoya/avatar.png",
+          "avatar": "http://localhost:8080/static/upload/avatar/We-Link/avatar.png",
           "title": "我是一个话题标题",
           "userId": 1,
           "good": false,
@@ -968,7 +968,7 @@ image:./images/captcha.gif[]
           "top": false,
           "upIds": "2",
           "id": 1,
-          "username": "tomoya"
+          "username": "We-Link"
         }
       ],
       "total": 1,

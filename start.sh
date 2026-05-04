@@ -1,2 +1,2 @@
 #!/bin/bash -e
-java -jar pybbs.jar --spring.profiles.active=prod > log.file 2>&1 &
+java -jar we-link.jar --spring.profiles.active=prod > log.file 2>&1 &

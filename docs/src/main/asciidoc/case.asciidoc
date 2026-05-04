@@ -1,4 +1,4 @@
-欢迎大家提交使用pybbs部署的网站地址, 可以给我发邮件告知 py2qiuse@gmail.com
+欢迎大家提交使用We-Link部署的网站地址, 可以给我发邮件告知 py2qiuse@gmail.com
 
 |===
 | 版本 | 域名

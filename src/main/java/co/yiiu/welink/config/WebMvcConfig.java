@@ -3,6 +3,7 @@ package co.yiiu.welink.config;
 import co.yiiu.welink.interceptor.CommonInterceptor;
 import co.yiiu.welink.interceptor.UserInterceptor;
 import co.yiiu.welink.interceptor.XssSanitizingFilter;
+import co.yiiu.welink.util.UploadPathResolver;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     private CommonInterceptor commonInterceptor;
     @Resource
     private UserInterceptor userInterceptor;
+    @Resource
+    private UploadPathResolver uploadPathResolver;
 
     @Bean
     public FilterRegistrationBean<XssSanitizingFilter> xssFilterRegistration() {
@@ -54,6 +57,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // Keep uploaded files available even when upload_path is configured outside ./static.
+        registry.addResourceHandler("/static/upload/**").addResourceLocations("file:" + uploadPathResolver.resolveUploadRootPath());
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/", "file:./static/");
     }
 

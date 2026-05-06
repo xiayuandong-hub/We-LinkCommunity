@@ -4,6 +4,7 @@ import co.yiiu.welink.service.ISystemConfigService;
 import co.yiiu.welink.util.HashUtil;
 import co.yiiu.welink.util.MD5Util;
 import co.yiiu.welink.util.StringUtil;
+import co.yiiu.welink.util.UploadPathResolver;
 import co.yiiu.welink.util.identicon.generator.IBaseGenerator;
 import co.yiiu.welink.util.identicon.generator.impl.MyGenerator;
 import com.google.common.base.Preconditions;
@@ -36,6 +37,8 @@ public class Identicon {
     private final IBaseGenerator generator;
     @Resource
     private ISystemConfigService systemConfigService;
+    @Resource
+    private UploadPathResolver uploadPathResolver;
 
     public Identicon() {
         this.generator = new MyGenerator();
@@ -95,9 +98,8 @@ public class Identicon {
         String fileName = "avatar.png";
         String userAvatarPath = "avatar/" + username + "/";
         try {
-            File file = new File(systemConfigService.selectAllConfig().get("upload_path").toString() + userAvatarPath);
-            if (!file.exists()) file.mkdirs();
-            File file1 = new File(systemConfigService.selectAllConfig().get("upload_path").toString() + userAvatarPath + fileName);
+            File file = uploadPathResolver.resolveDirectory(userAvatarPath);
+            File file1 = new File(file, fileName);
             if (!file1.exists()) file1.createNewFile();
             ImageIO.write(image, "PNG", file1);
             return systemConfigService.selectAllConfig().get("static_url").toString() + userAvatarPath + fileName;

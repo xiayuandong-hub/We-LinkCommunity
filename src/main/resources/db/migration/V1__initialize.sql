@@ -348,7 +348,7 @@ VALUES
 	(14, 'mail_username', 'xxoo@qq.com', '发送邮件的邮箱地址', 24, 'email', NULL, 0),
 	(18, 'static_url', 'http://localhost:8080/static/upload/', '静态文件访问地址，主要用于上传图片的访问，注意最后有个\"/\"', 25, 'url', NULL, 0),
 	(20, 'upload_avatar_size_limit', '2', '上传头像文件大小，单位MB，默认2MB', 25, 'number', NULL, 0),
-	(21, 'upload_path', '/Users/hh/git/github/We-Link/static/upload/', '上传文件的路径，注意最后有个\"/\"', 25, 'text', NULL, 0),
+	(21, 'upload_path', './static/upload/', '上传文件的路径，注意最后有个\"/\"', 25, 'text', NULL, 0),
 	(7, 'create_comment_score', '5', '发布评论奖励的积分', 26, 'number', NULL, 0),
 	(8, 'create_topic_score', '10', '创建话题奖励的积分', 26, 'number', NULL, 0),
 	(9, 'delete_comment_score', '5', '删除评论要被扣除的积分', 26, 'number', NULL, 0),

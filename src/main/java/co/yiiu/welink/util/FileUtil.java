@@ -36,6 +36,8 @@ public class FileUtil {
 
     @Resource
     private ISystemConfigService systemConfigService;
+    @Resource
+    private UploadPathResolver uploadPathResolver;
 
     public static String getFileMD5(InputStream in) {
         byte[] buffer = new byte[1024];
@@ -76,12 +78,10 @@ public class FileUtil {
             if (StringUtils.isEmpty(fileName)) fileName = StringUtil.uuid();
             String suffix = "." + Objects.requireNonNull(file.getContentType()).split("/")[1];
             // 如果存放目录不存在，则创建
-            File savePath = new File(systemConfigService.selectAllConfig().get("upload_path").toString() + customPath);
-            if (!savePath.exists()) savePath.mkdirs();
+            File savePath = uploadPathResolver.resolveDirectory(customPath);
 
             // 给上传的路径拼上文件名与后缀
-            String localPath = systemConfigService.selectAllConfig().get("upload_path").toString() + customPath + "/" + fileName + suffix;
-            File file1 = new File(localPath);
+            File file1 = new File(savePath, fileName + suffix);
             if (file1.exists()) {
                 file1.delete();
             }

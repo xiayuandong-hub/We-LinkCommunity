@@ -64,7 +64,7 @@
                 t.in_time between #{startDate} and #{endDate}
             </if>
             <if test="username != null">
-                and u.username = #{username}
+                and u.username like concat('%', #{username}, '%')
             </if>
         </where>
         order by t.in_time desc

@@ -10,6 +10,7 @@ import co.yiiu.welink.service.*;
 import co.yiiu.welink.util.IpUtil;
 import co.yiiu.welink.util.Result;
 import co.yiiu.welink.util.SensitiveWordUtil;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -84,6 +85,7 @@ public class TopicApiController extends BaseApiController {
         //    String tags = body.get("tags");
         ApiAssert.notEmpty(title, "请输入标题");
         ApiAssert.isNull(topicService.selectByTitle(title), "话题标题重复");
+        ApiAssert.notTrue(containsSensitiveWord(title) || containsSensitiveWord(content), "发帖失败，含有敏感词！");
         //    String[] strings = StringUtils.commaDelimitedListToStringArray(tags);
         //    Set<String> set = StringUtil.removeEmpty(strings);
         //    ApiAssert.notTrue(set.isEmpty() || set.size() > 5, "请输入标签且标签最多5个");
@@ -102,6 +104,7 @@ public class TopicApiController extends BaseApiController {
         String title = body.get("title");
         String content = body.get("content");
         ApiAssert.notEmpty(title, "请输入标题");
+        ApiAssert.notTrue(containsSensitiveWord(title) || containsSensitiveWord(content), "更新失败，含有敏感词！");
         // 更新话题
         Topic topic = topicService.selectById(id);
         ApiAssert.isTrue(topic.getUserId().equals(user.getId()), "谁给你的权限修改别人的话题的？");
@@ -131,5 +134,9 @@ public class TopicApiController extends BaseApiController {
         ApiAssert.notTrue(topic.getUserId().equals(user.getId()), "给自己话题点赞，脸皮真厚！！");
         int voteCount = topicService.vote(topic, getApiUser());
         return success(voteCount);
+    }
+
+    private boolean containsSensitiveWord(String text) {
+        return !StringUtils.isEmpty(text) && SensitiveWordUtil.contains(text);
     }
 }

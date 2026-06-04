@@ -51,6 +51,9 @@ public class UserAdminController extends BaseAdminController {
     @PostMapping("/edit")
     @ResponseBody
     public Result update(User user) {
+        if (user.getScore() != null && user.getScore() < 0) {
+            return error("积分不允许小于0！");
+        }
         if (!StringUtils.isEmpty(user.getPassword()) && !StringUtil.check(user.getPassword(), StringUtil.PASSWORDREGEX)) {
             return error("密码：至少一个大写字母、至少一个小写字母、至少一个数字、至少16位");
         }

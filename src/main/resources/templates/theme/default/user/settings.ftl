@@ -1,5 +1,89 @@
 <#include "../layout/layout.ftl"/>
 <@html page_title="设置" page_tab="settings">
+    <style>
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css");
+
+        .avatar-upload-link {
+            color: #4fa7c7;
+            font-weight: 600;
+        }
+
+        .avatar-upload-link:hover {
+            color: #355668;
+            text-decoration: none;
+        }
+
+        .avatar-cropper-image-wrapper {
+            min-height: 320px;
+            max-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #f7fcfe;
+            border: 1px solid #d7eaf1;
+        }
+
+        .avatar-cropper-image-wrapper img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .avatar-crop-preview {
+            width: 112px;
+            height: 112px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 24px;
+            border: 1px solid #d7eaf1;
+            background: #ffffff;
+            box-shadow: 0 18px 36px -30px rgba(79, 167, 199, .22);
+        }
+
+        .avatar-crop-tip {
+            margin-bottom: 0;
+            color: #6d8794;
+            line-height: 1.75;
+        }
+
+        .avatar-crop-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        #avatarCropModal .modal-content {
+            border: 0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px -36px rgba(79, 167, 199, .24);
+        }
+
+        #avatarCropModal .modal-header {
+            border-bottom: 1px solid #d7eaf1;
+            background: #eaf7fb;
+        }
+
+        #avatarCropModal .modal-footer {
+            border-top: 1px solid #d7eaf1;
+        }
+
+        @media (max-width: 767px) {
+            .avatar-cropper-image-wrapper {
+                min-height: 240px;
+            }
+
+            .avatar-crop-preview {
+                width: 88px;
+                height: 88px;
+                border-radius: 20px;
+            }
+        }
+    </style>
     <div class="row">
         <div class="col-md-9">
             <#if !user.active>
@@ -110,8 +194,9 @@
                                 <img src="${user.avatar!}" class="avatar avatar-sm" style="vertical-align: bottom" alt="avatar"/>
                             </div>
                             <div class="offset-sm-2 col-sm-10" style="margin-top: 10px;">
-                                <a href="javascript:;" id="selectAvatar">上传新头像</a>
-                                <input type="file" class="d-none" name="file" id="file"/>
+                                <a href="javascript:;" id="selectAvatar" class="avatar-upload-link">上传新头像并裁切</a>
+                                <input type="file" class="d-none" name="file" id="file" accept="image/*"/>
+                                <div class="text-muted mt-2">上传后可手动裁切为 1:1 的方形头像。</div>
                             </div>
                         </div>
                     </form>
@@ -147,8 +232,103 @@
             <#include "../components/token.ftl"/>
         </div>
     </div>
+    <div class="modal fade" id="avatarCropModal" tabindex="-1" role="dialog" aria-labelledby="avatarCropModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="avatarCropModalLabel">裁切头像</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8 mb-3 mb-md-0">
+                            <div class="avatar-cropper-image-wrapper">
+                                <img id="avatarCropperImage" alt="待裁切头像"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="avatar-crop-preview mb-3"></div>
+                                <p class="avatar-crop-tip">拖动图片并调整范围，保存后头像会按 1:1 比例更新。</p>
+                            </div>
+                            <div class="avatar-crop-actions">
+                                <button type="button" class="btn btn-light" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-info" id="confirmAvatarCrop">保存头像</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js"></script>
     <script>
         $(function () {
+            var cropper = null;
+            var avatarObjectUrl = null;
+            var avatarMimeType = "image/png";
+            var avatarFileName = "avatar.png";
+            var avatarCropImage = document.getElementById("avatarCropperImage");
+            var avatarUrlCreator = window.URL || window.webkitURL;
+            var $avatarCropModal = $("#avatarCropModal");
+            var $confirmAvatarCrop = $("#confirmAvatarCrop");
+
+            function resetAvatarCropper() {
+                if (cropper) {
+                    cropper.destroy();
+                    cropper = null;
+                }
+                if (avatarObjectUrl && avatarUrlCreator) {
+                    avatarUrlCreator.revokeObjectURL(avatarObjectUrl);
+                    avatarObjectUrl = null;
+                }
+                avatarCropImage.removeAttribute("src");
+                $("#file").val("");
+                $confirmAvatarCrop.prop("disabled", false).text("保存头像");
+            }
+
+            function uploadAvatar(blob) {
+                var fd = new FormData();
+                fd.append("file", blob, avatarFileName);
+                fd.append("type", "avatar");
+                fd.append("token", "${_user.token!}");
+                $.ajax({
+                    url: "/api/upload",
+                    type: "POST",
+                    data: fd,
+                    dataType: "json",
+                    headers: {
+                        token: "${_user.token!}"
+                    },
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.code === 200) {
+                            if (data.detail.errors.length === 0) {
+                                suc("修改头像成功");
+                                $.each($(".avatar"), function (i, v) {
+                                    $(v).attr("src", data.detail.urls[0]);
+                                });
+                                $avatarCropModal.modal("hide");
+                            } else {
+                                err(data.detail.errors[0]);
+                            }
+                        } else {
+                            err(data.description);
+                        }
+                    },
+                    error: function () {
+                        err("头像上传失败，请稍后重试");
+                    },
+                    complete: function () {
+                        $confirmAvatarCrop.prop("disabled", false).text("保存头像");
+                    }
+                });
+            }
+
             $("#settings_btn").click(function () {
                 var telegramName = $("#telegramName").val();
                 var website = $("#website").val();
@@ -176,34 +356,66 @@
                 $("#file").click();
             });
             $("#file").change(function () {
-                var fd = new FormData();
-                fd.append("file", document.getElementById("file").files[0]);
-                fd.append("type", "avatar");
-                fd.append("token", "${_user.token!}");
-                $.post({
-                    url: "/api/upload",
-                    data: fd,
-                    dataType: 'json',
-                    headers: {
-                        'token': '${_user.token!}'
-                    },
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        if (data.code === 200) {
-                            if (data.detail.errors.length === 0) {
-                                suc("修改头像成功");
-                                $.each($(".avatar "), function (i, v) {
-                                    $(v).attr("src", data.detail.urls[0]);
-                                })
-                            } else {
-                                err(data.detail.errors[0]);
-                            }
-                        } else {
-                            err(data.description);
-                        }
+                var file = this.files[0];
+                if (!file) {
+                    return;
+                }
+                if (typeof Cropper === "undefined") {
+                    err("头像裁切组件加载失败，请刷新页面后重试");
+                    $(this).val("");
+                    return;
+                }
+                if (!file.type || file.type.indexOf("image/") !== 0) {
+                    err("请选择图片文件");
+                    $(this).val("");
+                    return;
+                }
+                avatarMimeType = file.type === "image/jpeg" || file.type === "image/jpg" ? "image/jpeg" : "image/png";
+                avatarFileName = avatarMimeType === "image/jpeg" ? "avatar.jpg" : "avatar.png";
+                if (avatarObjectUrl && avatarUrlCreator) {
+                    avatarUrlCreator.revokeObjectURL(avatarObjectUrl);
+                }
+                avatarObjectUrl = avatarUrlCreator.createObjectURL(file);
+                avatarCropImage.src = avatarObjectUrl;
+                $avatarCropModal.modal("show");
+            });
+            $avatarCropModal.on("shown.bs.modal", function () {
+                if (cropper) {
+                    cropper.destroy();
+                }
+                cropper = new Cropper(avatarCropImage, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    dragMode: "move",
+                    autoCropArea: 1,
+                    background: false,
+                    preview: ".avatar-crop-preview",
+                    responsive: true,
+                    restore: false,
+                    checkCrossOrigin: false
+                });
+            });
+            $avatarCropModal.on("hidden.bs.modal", function () {
+                resetAvatarCropper();
+            });
+            $confirmAvatarCrop.on("click", function () {
+                if (!cropper) {
+                    return;
+                }
+                $confirmAvatarCrop.prop("disabled", true).text("保存中...");
+                cropper.getCroppedCanvas({
+                    width: 400,
+                    height: 400,
+                    fillColor: "#FFFFFF",
+                    imageSmoothingQuality: "high"
+                }).toBlob(function (blob) {
+                    if (!blob) {
+                        err("头像裁切失败，请重试");
+                        $confirmAvatarCrop.prop("disabled", false).text("保存头像");
+                        return;
                     }
-                })
+                    uploadAvatar(blob);
+                }, avatarMimeType, .92);
             });
 
             // 发送激活邮件

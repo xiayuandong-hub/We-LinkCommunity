@@ -35,9 +35,6 @@
             </div>
         </div>
         <div class="col-md-3 hidden-xs">
-            <#if site?? && site.content_style?? && site.content_style == "MD">
-                <#include "../components/markdown_guide.ftl"/>
-            </#if>
             <#include "../components/create_topic_guide.ftl"/>
         </div>
     </div>

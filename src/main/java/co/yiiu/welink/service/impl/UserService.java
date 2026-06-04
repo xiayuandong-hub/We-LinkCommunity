@@ -217,7 +217,7 @@ public class UserService implements IUserService {
         page.setDesc("in_time");
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(username)) {
-            wrapper.lambda().eq(User::getUsername, username);
+            wrapper.lambda().like(User::getUsername, username);
         }
         return userMapper.selectPage(page, wrapper);
     }

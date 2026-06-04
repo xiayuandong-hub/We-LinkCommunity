@@ -1,22 +1,21 @@
 package co.yiiu.welink.controller.admin;
 
+import co.yiiu.welink.config.service.SensitiveWordFilterService;
 import co.yiiu.welink.model.SensitiveWord;
 import co.yiiu.welink.service.ISensitiveWordService;
 import co.yiiu.welink.util.Result;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 /**
  * Created by We-Link.
@@ -27,11 +26,13 @@ import java.io.IOException;
 @RequestMapping("/admin/sensitive_word")
 public class SensitiveWordAdminController extends BaseAdminController {
 
-    private final Logger log = LoggerFactory.getLogger(SensitiveWordAdminController.class);
+    private static final int SENSITIVE_WORD_MAX_LENGTH = 10;
 
     @Autowired
     @Resource
     private ISensitiveWordService sensitiveWordService;
+    @Resource
+    private SensitiveWordFilterService sensitiveWordFilterService;
 
     @RequiresPermissions("sensitive_word:list")
     @GetMapping("/list")
@@ -46,9 +47,16 @@ public class SensitiveWordAdminController extends BaseAdminController {
     @PostMapping("/add")
     @ResponseBody
     public Result add(String word) {
+        word = normalizeWord(word);
+        Result validateResult = validateWord(word);
+        if (validateResult != null) return validateResult;
+        Result duplicateResult = validateDuplicateWord(null, word);
+        if (duplicateResult != null) return duplicateResult;
+
         SensitiveWord sensitiveWord = new SensitiveWord();
         sensitiveWord.setWord(word);
         sensitiveWordService.save(sensitiveWord);
+        sensitiveWordFilterService.refresh();
         return success();
     }
 
@@ -56,7 +64,14 @@ public class SensitiveWordAdminController extends BaseAdminController {
     @PostMapping("/edit")
     @ResponseBody
     public Result edit(Integer id, String word) {
+        word = normalizeWord(word);
+        Result validateResult = validateWord(word);
+        if (validateResult != null) return validateResult;
+        Result duplicateResult = validateDuplicateWord(id, word);
+        if (duplicateResult != null) return duplicateResult;
+
         sensitiveWordService.updateWordById(id, word);
+        sensitiveWordFilterService.refresh();
         return success();
     }
 
@@ -65,32 +80,25 @@ public class SensitiveWordAdminController extends BaseAdminController {
     @ResponseBody
     public Result delete(Integer id) {
         sensitiveWordService.deleteById(id);
+        sensitiveWordFilterService.refresh();
         return success();
     }
 
-    @RequiresPermissions("sensitive_word:import")
-    @PostMapping("import")
-    @ResponseBody
-    public Result _import(@RequestParam("file") MultipartFile file) {
-        try {
-            HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
-            HSSFSheet worksheet = workbook.getSheetAt(0);
-            int i = 0;
-            while (i <= worksheet.getLastRowNum()) {
-                HSSFRow row = worksheet.getRow(i++);
-                String word = row.getCell(0).getStringCellValue();
-                SensitiveWord sensitiveWord = sensitiveWordService.selectByWord(word);
-                if (sensitiveWord == null) {
-                    sensitiveWord = new SensitiveWord();
-                    sensitiveWord.setWord(word);
-                    sensitiveWordService.save(sensitiveWord);
-                }
-            }
-            return success();
-        } catch (IOException e) {
-            //      e.printStackTrace();
-            log.error(e.getMessage());
-            return error(e.getMessage());
+    private String normalizeWord(String word) {
+        return word == null ? null : word.trim();
+    }
+
+    private Result validateWord(String word) {
+        if (StringUtils.isEmpty(word)) return error("不能为空");
+        if (word.length() > SENSITIVE_WORD_MAX_LENGTH) return error("敏感词不能超过10个字");
+        return null;
+    }
+
+    private Result validateDuplicateWord(Integer id, String word) {
+        SensitiveWord sensitiveWord = sensitiveWordService.selectByWord(word);
+        if (sensitiveWord != null && (id == null || !sensitiveWord.getId().equals(id))) {
+            return error("已存在");
         }
+        return null;
     }
 }

@@ -170,14 +170,6 @@
         </dependency>
         <!-- aliyun sms end -->
 
-        <!-- import excel poi start -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>4.1.0</version>
-        </dependency>
-        <!-- import excel poi end -->
-
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -218,6 +210,7 @@
             <artifactId>commons-text</artifactId>
             <version>1.9</version>
         </dependency>
+
     </dependencies>
 
     <build>

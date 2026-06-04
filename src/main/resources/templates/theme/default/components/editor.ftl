@@ -13,12 +13,12 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #000;
+            background-color: rgba(53, 86, 104, .28);
             z-index: 123456;
             opacity: .3;
             vertical-align: middle;
             text-align: center;
-            color: #000;
+            color: transparent;
             padding-top: 200px;
         }
 
@@ -27,14 +27,17 @@
             left: 0;
             right: 0;
             top: 220px;
-            border: 1px solid #d3d4d3;
-            background-color: #fff;
+            border: 1px solid #d7eaf1;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 24px 48px -32px rgba(79, 167, 199, .22);
             margin: 0 auto;
             text-align: center;
             padding: 30px 20px;
             opacity: 1;
             z-index: 1234567;
             width: 220px;
+            color: #355668;
         }
     </style>
     <div class="upload-progress-div d-none">

@@ -1,8 +1,4 @@
 <footer class="main-footer" style="position: fixed; bottom: 0; width: 100%;">
-    <div class="pull-right hidden-xs">
-        <b>Version</b> 2.4.8
-    </div>
-    <strong>Copyright © 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright © 2026 MyStudio. All rights reserved.</strong>
 </footer>
 <div class="control-sidebar-bg"></div>

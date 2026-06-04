@@ -36,6 +36,8 @@ public interface ITagService {
     // 查询标签列表
     IPage<Tag> selectAll(Integer pageNo, Integer pageSize, String name);
 
+    void insert(Tag tag);
+
     void update(Tag tag);
 
     // 如果 topic_tag 表里还有关联的数据，这里删除会报错

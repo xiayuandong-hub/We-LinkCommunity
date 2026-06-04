@@ -16,7 +16,6 @@
             <div class="box-header with-border">
                 <h3 class="box-title">用户编辑</h3>
             </div>
-            <!-- /.box-header -->
             <div class="box-body">
                 <form id="form" onsubmit="return;">
                     <input type="hidden" name="id" value="${user.id}">
@@ -33,7 +32,7 @@
                     <div class="form-group">
                         <label>积分</label>
                         <input type="number" pattern="\d" id="score" name="score" value="${user.score!0}"
-                               class="form-control"
+                               class="form-control" min="0"
                                placeholder="积分"/>
                     </div>
                     <div class="form-group">
@@ -71,7 +70,7 @@
                                     function refreshToken(self) {
                                         $(self).button("loading");
                                         $.get("/admin/user/refreshToken?id=${user.id}", function (data) {
-                                            console.log(data)
+                                            console.log(data);
                                             if (data.code === 200) {
                                                 toast("成功", "success");
                                                 $("#token").val(data.detail);
@@ -103,8 +102,12 @@
     </section>
     <script>
         $(function () {
-            // 保存用户信息
             $("#btn").click(function () {
+                var score = $.trim($("#score").val());
+                if (score !== "" && Number(score) < 0) {
+                    toast("积分不允许小于0！");
+                    return;
+                }
                 $.post("/admin/user/edit", $("#form").serialize(), function (data) {
                     if (data.code === 200) {
                         toast("编辑成功", "success");
@@ -114,8 +117,8 @@
                     } else {
                         toast(data.description);
                     }
-                })
+                });
             });
-        })
+        });
     </script>
 </@html>

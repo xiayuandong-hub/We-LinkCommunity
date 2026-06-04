@@ -130,10 +130,15 @@ public class TagService implements ITagService {
         QueryWrapper<Tag> wrapper = new QueryWrapper<>();
         // 当传进来的name不为null的时候，就根据name查询
         if (!StringUtils.isEmpty(name)) {
-            wrapper.lambda().eq(Tag::getName, name);
+            wrapper.lambda().like(Tag::getName, name);
         }
         wrapper.orderByDesc("topic_count");
         return tagMapper.selectPage(iPage, wrapper);
+    }
+
+    @Override
+    public void insert(Tag tag) {
+        tagMapper.insert(tag);
     }
 
     @Override

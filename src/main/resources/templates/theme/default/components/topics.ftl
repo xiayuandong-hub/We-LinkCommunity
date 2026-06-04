@@ -1,6 +1,6 @@
 <#macro topics page tags=true>
     <#list page.records as topic>
-        <div class="media">
+        <div class="media topic-list-item">
             <a href="/user/${topic.username!}" class="mr-3"><img src="${topic.avatar!}" class="avatar" alt=""></a>
             <div class="media-body">
                 <div class="title">

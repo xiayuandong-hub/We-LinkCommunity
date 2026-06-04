@@ -56,7 +56,7 @@ public class SensitiveWordService implements ISensitiveWordService {
         IPage<SensitiveWord> iPage = new MyPage<>(pageNo, Integer.parseInt(systemConfigService.selectAllConfig().get
                 ("page_size").toString()));
         QueryWrapper<SensitiveWord> wrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(word)) wrapper.lambda().eq(SensitiveWord::getWord, word);
+        if (!StringUtils.isEmpty(word)) wrapper.lambda().like(SensitiveWord::getWord, word);
         return sensitiveWordMapper.selectPage(iPage, wrapper);
     }
 
@@ -72,6 +72,7 @@ public class SensitiveWordService implements ISensitiveWordService {
     public SensitiveWord selectByWord(String word) {
         QueryWrapper<SensitiveWord> wrapper = new QueryWrapper<>();
         wrapper.lambda().eq(SensitiveWord::getWord, word);
-        return sensitiveWordMapper.selectOne(wrapper);
+        List<SensitiveWord> sensitiveWords = sensitiveWordMapper.selectList(wrapper);
+        return sensitiveWords.isEmpty() ? null : sensitiveWords.get(0);
     }
 }

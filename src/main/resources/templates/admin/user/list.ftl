@@ -59,7 +59,7 @@
             </div>
         </div>
         <#include "../layout/paginate.ftl">
-        <@paginate currentPage=page.current totalPage=page.pages actionUrl="/admin/user/list" urlParas=""/>
+        <@paginate currentPage=page.current totalPage=page.pages actionUrl="/admin/user/list" urlParas="&username=${username!}"/>
     </section>
     <script>
         <#if sec.hasPermission("user:delete")>

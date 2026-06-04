@@ -18,19 +18,19 @@
                     </div>
                 </div>
                 <#if user.githubName?? || user.telegramName?? || user.website??>
-                    <div class="card-footer" style="background-color: #fff;">
+                    <div class="card-footer profile-social-footer">
                         <#if user.website?? && user.website != "">
                             <a href="${user.website!}" class="social_label" target="_blank"><i class="fa fa-home"
-                                                                                               style="color: #91c330;"></i> ${user.website!}
+                                                                                               style="color: #4FA7C7;"></i> ${user.website!}
                             </a>
                         </#if>
                         <#if user.githubName?? && user.githubName != "">
                             <a href="https://github.com/${user.githubName!}" class="social_label" target="_blank"><i
-                                        class="fa fa-github" style="color: black;"></i> ${user.githubName!}</a>
+                                        class="fa fa-github" style="color: #355668;"></i> ${user.githubName!}</a>
                         </#if>
                         <#if user.telegramName?? && user.telegramName != "">
                             <a href="https://telegram.me/${user.telegramName!}" class="social_label" target="_blank"><i
-                                        class="fa fa-telegram" style="color: #61a7e2;"></i> ${user.telegramName!}</a>
+                                        class="fa fa-telegram" style="color: #79C4DA;"></i> ${user.telegramName!}</a>
                         </#if>
                     </div>
                 </#if>

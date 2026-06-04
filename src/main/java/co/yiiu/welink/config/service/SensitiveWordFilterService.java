@@ -27,6 +27,10 @@ public class SensitiveWordFilterService {
     // 初始化过滤器
     @PostConstruct
     public void init() {
+        refresh();
+    }
+
+    public synchronized void refresh() {
         List<SensitiveWord> sensitiveWords = sensitiveWordService.selectAll();
         Set<String> sensitiveWordSet = new HashSet<>();
         for (SensitiveWord sensitiveWord : sensitiveWords) {

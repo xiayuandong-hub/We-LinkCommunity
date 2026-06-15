@@ -1,0 +1,24 @@
+# E2E 测试配置文件 - H2 内存数据库
+# 用于 `mvn spring-boot:run -Dspring-boot.run.profiles=e2e`
+server:
+  port: 8080
+
+spring:
+  flyway:
+    enabled: false
+  freemarker:
+    cache: false
+  devtools:
+    restart:
+      enabled: false
+
+# 站点数据源配置 - H2
+site:
+  datasource_driver: org.h2.Driver
+  datasource_url: jdbc:h2:mem:we_link_e2e;MODE=MySQL;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:schema-e2e.sql'
+  datasource_username: sa
+  datasource_password:
+
+mybatis-plus:
+  global-config:
+    banner: false

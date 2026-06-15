@@ -112,8 +112,16 @@ public class ShiroConfig {
     public SimpleCookie rememberMeCookie() {
         //这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
         SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
-        // 记住我cookie生效时间 单位秒
-        int adminRememberMeMaxAge = Integer.parseInt(systemConfigService.selectAllConfig().get("admin_remember_me_max_age").toString());
+        // 记住我cookie生效时间，默认30天。若数据库未就绪（如测试环境下H2初始化顺序），回退到默认值
+        int adminRememberMeMaxAge = 30;
+        try {
+            Object val = systemConfigService.selectAllConfig().get("admin_remember_me_max_age");
+            if (val != null) {
+                adminRememberMeMaxAge = Integer.parseInt(val.toString());
+            }
+        } catch (Exception e) {
+            log.debug("Could not read admin_remember_me_max_age from database, using default value 30");
+        }
         simpleCookie.setMaxAge(adminRememberMeMaxAge * 24 * 60 * 60);
         return simpleCookie;
     }

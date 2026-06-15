@@ -45,14 +45,18 @@ public class CommonInterceptor implements HandlerInterceptor {
         User user = (User) session.getAttribute("_user");
         if (user == null) {
             // 获取cookie里的token，查询用户的信息并放入session里
-            String token = cookieUtil.getCookie(systemConfigService.selectAllConfig().get("cookie_name").toString());
+            Object cookieName = systemConfigService.selectAllConfig().get("cookie_name");
+            String token = cookieName != null ? cookieUtil.getCookie(cookieName.toString()) : null;
             if (!StringUtils.isEmpty(token)) {
                 // 根据token查询用户是否存在
                 user = userService.selectByToken(token);
                 if (user != null) {
                     // 用户存在写session，cookie然后给予通过
                     session.setAttribute("_user", user);
-                    cookieUtil.setCookie(systemConfigService.selectAllConfig().get("cookie_name").toString(), user.getToken());
+                    Object name = systemConfigService.selectAllConfig().get("cookie_name");
+                    if (name != null) {
+                        cookieUtil.setCookie(name.toString(), user.getToken());
+                    }
                 }
             }
         }
@@ -62,10 +66,12 @@ public class CommonInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         if (!HttpUtil.isApiRequest(request) && modelAndView != null) {
-            // TODO 这地方有安全隐患，通过这个设置，就可以在页面上获取到system_config表里的所有数据了，如果有人恶意往页面里加入一些代码，就可以拿到一些不可告人的东西。。
-            // 后面啥时候想起来了，再收拾它
-            // 2023/3/14 过滤掉了systemConfig里type为password的数据，应该能提升一丢丢的安全性吧
-            modelAndView.addObject("site", systemConfigService.selectAllConfigWithoutPassword());
+            try {
+                modelAndView.addObject("site", systemConfigService.selectAllConfigWithoutPassword());
+            } catch (Exception e) {
+                log.error("Failed to load site config: {}", e.getMessage());
+                modelAndView.addObject("site", new java.util.HashMap<String, String>());
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package co.yiiu.welink.config;
 
 import co.yiiu.welink.util.SpringContextUtil;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import java.sql.Statement;
  * https://atjiu.github.io
  */
 @Configuration
+@Profile("!test & !e2e") // 测试和 E2E 环境下使用 H2 内存数据库，不需要检查/创建 MySQL 数据库
 public class DataSourceHelper {
 
     @Resource

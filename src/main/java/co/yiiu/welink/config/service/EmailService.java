@@ -36,10 +36,13 @@ public class EmailService implements BaseService<Session> {
         if (session != null) return session;
         // session为空，判断系统是否配置了邮箱相关的参数，配置了继续，没配置白白
         SystemConfig systemConfigHost = systemConfigService.selectByKey("mail_host");
+        if (systemConfigHost == null) return null;
         String host = systemConfigHost.getValue();
         SystemConfig systemConfigUsername = systemConfigService.selectByKey("mail_username");
+        if (systemConfigUsername == null) return null;
         String username = systemConfigUsername.getValue();
         SystemConfig systemConfigPassword = systemConfigService.selectByKey("mail_password");
+        if (systemConfigPassword == null) return null;
         String password = systemConfigPassword.getValue();
         if (StringUtils.isEmpty(host) || StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) return null;
         Properties properties = new Properties();

@@ -13,6 +13,9 @@ import java.util.Map;
 public interface ISystemConfigService {
     Map<String, String> selectAllConfig();
 
+    // 刷新缓存（E2E 测试用，确保 schema 加载后缓存正确）
+    void refreshCache();
+
     // 根据键取值
     SystemConfig selectByKey(String key);
 

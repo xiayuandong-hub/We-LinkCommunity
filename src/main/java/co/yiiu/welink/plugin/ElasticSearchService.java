@@ -86,10 +86,13 @@ public class ElasticSearchService implements BaseService<RestHighLevelClient> {
         if (this.client != null) return client;
         try {
             SystemConfig systemConfigHost = systemConfigService.selectByKey("elasticsearch_host");
+            if (systemConfigHost == null) return null;
             String host = systemConfigHost.getValue();
             SystemConfig systemConfigPort = systemConfigService.selectByKey("elasticsearch_port");
+            if (systemConfigPort == null) return null;
             String port = systemConfigPort.getValue();
             SystemConfig systemConfigName = systemConfigService.selectByKey("elasticsearch_index");
+            if (systemConfigName == null) return null;
             name = systemConfigName.getValue();
 
             if (StringUtils.isEmpty(host) || StringUtils.isEmpty(port)) return null;

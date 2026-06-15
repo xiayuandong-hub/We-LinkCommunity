@@ -39,20 +39,20 @@ public class RedisService implements BaseService<JedisPool> {
             // 获取redis的连接
             // host
             SystemConfig systemConfigHost = systemConfigService.selectByKey("redis_host");
-            String host = systemConfigHost.getValue();
+            String host = systemConfigHost != null ? systemConfigHost.getValue() : "";
             // port
             SystemConfig systemConfigPort = systemConfigService.selectByKey("redis_port");
-            String port = systemConfigPort.getValue();
+            String port = systemConfigPort != null ? systemConfigPort.getValue() : "";
             // password
             SystemConfig systemConfigPassword = systemConfigService.selectByKey("redis_password");
-            String password = systemConfigPassword.getValue();
+            String password = systemConfigPassword != null ? systemConfigPassword.getValue() : "";
             password = StringUtils.isEmpty(password) ? null : password;
             // database
             SystemConfig systemConfigDatabase = systemConfigService.selectByKey("redis_database");
-            String database = systemConfigDatabase.getValue();
+            String database = systemConfigDatabase != null ? systemConfigDatabase.getValue() : "";
             // timeout
             SystemConfig systemConfigTimeout = systemConfigService.selectByKey("redis_timeout");
-            String timeout = systemConfigTimeout.getValue();
+            String timeout = systemConfigTimeout != null ? systemConfigTimeout.getValue() : "2000";
 
             if (!this.isRedisConfig()) {
                 log.info("redis配置信息不全或没有配置...");
@@ -80,16 +80,16 @@ public class RedisService implements BaseService<JedisPool> {
     // 判断redis是否配置了
     public boolean isRedisConfig() {
         SystemConfig systemConfigHost = systemConfigService.selectByKey("redis_host");
-        String host = systemConfigHost.getValue();
+        String host = systemConfigHost != null ? systemConfigHost.getValue() : "";
         // port
         SystemConfig systemConfigPort = systemConfigService.selectByKey("redis_port");
-        String port = systemConfigPort.getValue();
+        String port = systemConfigPort != null ? systemConfigPort.getValue() : "";
         // database
         SystemConfig systemConfigDatabase = systemConfigService.selectByKey("redis_database");
-        String database = systemConfigDatabase.getValue();
+        String database = systemConfigDatabase != null ? systemConfigDatabase.getValue() : "";
         // timeout
         SystemConfig systemConfigTimeout = systemConfigService.selectByKey("redis_timeout");
-        String timeout = systemConfigTimeout.getValue();
+        String timeout = systemConfigTimeout != null ? systemConfigTimeout.getValue() : "";
 
         return !StringUtils.isEmpty(host) && !StringUtils.isEmpty(port) && !StringUtils.isEmpty(database) && !StringUtils
                 .isEmpty(timeout);

@@ -101,13 +101,20 @@ public class SystemConfigService implements ISystemConfigService {
     }
 
     @Override
+    public void refreshCache() {
+        SYSTEM_CONFIG = null;
+        SYSTEM_CONFIG_WITHOUT_PASSWORD = null;
+        selectAllConfig(); // 重新加载
+    }
+
+    @Override
     public Map<String, String> selectAllConfigWithoutPassword() {
         if (SYSTEM_CONFIG_WITHOUT_PASSWORD != null) {
             return SYSTEM_CONFIG_WITHOUT_PASSWORD;
         }
         List<SystemConfig> systemConfigs = systemConfigMapper.selectList(null);
         SYSTEM_CONFIG_WITHOUT_PASSWORD = systemConfigs.stream()
-                .filter(systemConfig -> systemConfig.getPid() != 0 && !systemConfig.getType().equals("password"))
+                .filter(systemConfig -> systemConfig.getPid() != 0 && systemConfig.getType() != null && !systemConfig.getType().equals("password"))
                 .collect(Collectors.toMap(SystemConfig::getKey, SystemConfig::getValue));
         return SYSTEM_CONFIG_WITHOUT_PASSWORD;
     }

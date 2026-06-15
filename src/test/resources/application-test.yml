@@ -1,0 +1,48 @@
+# 测试配置文件 - H2 内存数据库
+spring:
+  datasource:
+    url: jdbc:h2:mem:we_link_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  flyway:
+    enabled: false
+  h2:
+    console:
+      enabled: true
+  freemarker:
+    cache: false
+
+# 站点数据源配置（覆盖 application.yml 中的 site.* 属性）
+site:
+  datasource_driver: org.h2.Driver
+  datasource_url: jdbc:h2:mem:we_link_test;MODE=MySQL;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'src/test/resources/schema.sql'
+  datasource_username: sa
+  datasource_password:
+
+mybatis-plus:
+  global-config:
+    banner: false
+  configuration:
+    # 测试时开启 SQL 日志以便调试
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 测试用系统配置默认值
+# 当 SystemConfigService 无法从数据库读取配置时使用这些默认值
+test:
+  config:
+    page_size: "20"
+    cookie_name: "user_token"
+    cookie_domain: "localhost"
+    base_url: "http://localhost:8080"
+    name: "We-Link社区测试版"
+    create_topic_score: "10"
+    create_comment_score: "5"
+    delete_topic_score: "10"
+    delete_comment_score: "5"
+    up_topic_score: "3"
+    up_comment_score: "3"
+    upload_path: "./static/upload/"
+    static_url: "http://localhost:8080/static/upload/"
+    content_style: "MD"
+    search: "0"
